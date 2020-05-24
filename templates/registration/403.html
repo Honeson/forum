@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{%block title %}Access denied{% endblock title %}
+
+{% block content %}
+
+<h2 style="color: crimson"> Permission denied </h2>
+<p>You cannot edit or delete any post you didn't create </p>
+<p><a href="{% url 'post_list' %}">Back to all posts</a> </p>
+
+{%  endblock content %}

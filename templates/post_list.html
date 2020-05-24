@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}My Blog{% endblock %}
+{% block content %} 
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    <div id="sidebar">    
+            <h2>My blog</h2>   
+             <p>This is my blog.</p> 
+    </div>
+    <h1>My Blog</h1>  
+    {% for post in posts %}
+    <h2> <a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>    
+    <p class="date"> Published {{ post.publish }} by {{ post.author }}</p>    
+    {{ post.body|truncatewords:30|linebreaks }} 
+    <a href="{% url 'post_edit' post.pk post.slug %}">Edit</a> | 
+        <a href="{% url 'post_delete' post.pk post.slug %}">Delete</a>  
+    <div class="card-footer text-center text-muted">
+        
+    </div>
+    <br/>
+    {% endfor %}
+{% include 'pagination.html' with page=page_obj %}
+
+{% endblock content %}
+
+<!-- I have used # there for now because i have tried so many things and nothing worked for me. always get a 404-->

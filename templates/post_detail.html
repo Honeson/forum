@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ post.title }} {% endblock title %}
+{% block content %}  
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    <h1>{{ post.title }}</h1>  
+    <p class="date">Published {{ post.publish }} by {{ post.author }}
+    </p>
+    {{ post.body|linebreaks }} 
+    <p><a href="{% url 'post_edit' post.pk post.slug %}">Edit</a> | 
+        <a href="{% url 'post_delete' post.pk post.slug %}">Delete</a></p> 
+        <p>Back to <a href="{% url 'post_list' %}">Forum</a>.</p> 
+{% endblock content %}
