@@ -2,44 +2,55 @@ from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.db.models import Count
+
+from django.contrib.auth import get_user_model as user
+from taggit.models import Tag
 
 
-from .models import Post
+from .models import Post, Comment
+from .forms import CommentForm
 # Create your views here.
 
 
-'''def post_list(request):
-    object_list = Post.published.all()
-    paginator = Paginator(object_list, 5)
-    page = request.GET.get('page')
-    try:
-        posts = paginator.page(page)
-    except PageNotAnInteger:
-        posts = paginator.page(1)
-    except EmptyPage:
-        posts = paginator.page(paginator.num_pages)
-    return render(request, 'post_list.html', {'page': page, 'posts': posts})'''
+@login_required
+def post_detail(request, post, pk):
+    post = get_object_or_404(Post, id=pk, slug=post, status='published')
+    comments = post.comments.filter(active=True)
+    new_comment = None
+
+    if request.method == 'POST':
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.post = post
+            new_comment.author = request.user
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
+    post_tags_ids = post.tags.values_list('id', flat=True)
+    similar_posts = Post.published.filter(tags__in=post_tags_ids).exclude(id=post.id)
+    similar_posts = similar_posts.annotate(same_tags=Count('tags')).order_by('-same_tags', '-publish')[:4]
+    return render(request,
+        'post_detail.html',
+        {'post': post,
+        'comments': comments,
+        'new_comment': new_comment,
+        'comment_form': comment_form,
+        'similar_posts': similar_posts})
 
 
-'''def post_detail(request, year, month, day, post):
-    post = get_object_or_404(Post,  slug=post,
-                                    status='published',
-                                    publish__year=year,
-                                    publish__month=month,
-                                    publish__day=day)
-    context = {'post': post}
-    return render(request, 'post_detail.html', context)'''
-
-
-class PostDetailView(LoginRequiredMixin, DetailView):
+'''class PostDetailView(LoginRequiredMixin, DetailView):
     queryset = Post.published.all()
     template_name = 'post_detail.html'
     context_object_name = 'post'
     query_pk_and_slug = True
     login_url = 'login'
+'''
     
 
 class PostCreateView(LoginRequiredMixin, CreateView):
@@ -53,12 +64,37 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class PostListView(LoginRequiredMixin, ListView):
+'''class PostListView(LoginRequiredMixin, ListView):
     queryset = Post.published.all()
     context_object_name = 'posts'
     paginate_by = 5
     template_name = 'post_list.html'
-    login_url = 'login'
+    login_url = 'login' '''
+
+@login_required
+def post_list(request, tag_slug=None):
+    object_list = Post.published.all()
+    tag = None
+
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        object_list = object_list.filter(tags__in=[tag])
+
+    paginator = Paginator(object_list, 5) # 5 posts in each page
+    page = request.GET.get('page')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        posts = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range deliver last page of results
+        posts = paginator.page(paginator.num_pages)
+    return render(request,
+                 'post_list.html',
+                 {'page': page,
+                  'posts': posts,
+                  'tag': tag})
 
 
 class PostUpdateView(LoginRequiredMixin, UpdateView):
@@ -85,6 +121,61 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
         if obj.author != self.request.user:
             raise PermissionDenied
         return super().dispatch(request, *args, **kwargs)
+
+
+# view to handle my email sending form in forms.py
+'''
+def post_share(request, post_id):
+    post = get_object_or_404(Post, id=post_id, status='published')
+    sent = False
+    if request.method == 'POST':
+        form = EmailPostForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            post_url = request.build_absolute_uri(post.get_absolute_url())
+            subject = f"{cd['name']} recommends you read {post.title}"
+            message = f"Read {post.title} at {post_url}\n\n" f"{cd['name']}'s comments: {cd['comments']}"
+            send_mail(subject, message, 'admin@myblog.com', [cd['to']])
+            sent = True
+    else:
+        form = EmailPostForm()
+    return render(request, 'post_share.html', {'post': post, 'form': form, 'sent': sent})'''
+
+"""
+class EmailPostView(FormView):
+    form_class = EmailPostForm
+    template_name = 'post_share.html'
+    context_object_name = 'post'
+    success_url = reverse_lazy('email_sent')
+
+    def form_valid(self, form):
+        comments = "{name}/ {email} said: ".format(
+            name=form.cleaned_data.get('name'),
+            email=form.cleaned_data.get('email')
+        )
+        comments+= "\n\n{0}".format(form.cleaned_data.get('comments'))
+        
+        send_mail(
+            subject=form.cleaned_data.get('subject').strip(),
+            message=comments,
+            from_email='ashanti@gmail.com',
+            recipient_list=[form.cleaned_data.get('email')],
+        )
+        return super(EmailPostView, self).form_valid(form)
+"""
+
+
+class CommentUpdateView(UpdateView):
+    model = Comment
+    fields = ('comment',)
+    template_name = 'comment_edit.html'
+
+
+class CommentDeleteView(DeleteView):
+    model = Comment
+    template_name = 'comment_delete.html'
+    success_url = reverse_lazy('post_list')
+
 
 
 

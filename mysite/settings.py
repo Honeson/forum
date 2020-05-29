@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+from django.urls import reverse
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -26,10 +28,6 @@ SECRET_KEY = 'vb#y^ws+4s_-^9n@^-jlz=1o8hali%n=dxsfzph=rf39jxn^@8'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
-
-# Application definition
-
 INSTALLED_APPS = [
     # Local apps
     'users.apps.UsersConfig',
@@ -38,6 +36,9 @@ INSTALLED_APPS = [
 
     # Third party
     'crispy_forms',
+    'django_social_share',
+    'taggit',
+    
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -76,6 +77,8 @@ TEMPLATES = [
         },
     },
 ]
+
+#FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
@@ -132,14 +135,17 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 AUTH_USER_MODEL = 'users.CustomUser'
+LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.sendgrid.net' 
-EMAIL_HOST_USER = 'apikey' 
-EMAIL_HOST_PASSWORD = '••••••••••••••••••••'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+'''
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'honesty1ofa1i@gmail.com' 
+EMAIL_HOST_PASSWORD = 'michaelhonesty'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+'''
 
 

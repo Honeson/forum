@@ -1,14 +1,65 @@
 {% extends 'base.html' %}
+{% load social_share %}
 {% load static %}
+
+
 
 {% block title %} {{ post.title }} {% endblock title %}
 {% block content %}  
+
 <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-    <h1>{{ post.title }}</h1>  
-    <p class="date">Published {{ post.publish }} by {{ post.author }}
-    </p>
-    {{ post.body|linebreaks }} 
-    <p><a href="{% url 'post_edit' post.pk post.slug %}">Edit</a> | 
-        <a href="{% url 'post_delete' post.pk post.slug %}">Delete</a></p> 
-        <p>Back to <a href="{% url 'post_list' %}">Forum</a>.</p> 
+
+<h1>{{ post.title }}</h1>  
+<p class="date">Published {{ post.publish }} by {{ post.author }}
+</p>
+{{ post.body|linebreaks }} 
+<p><a href="{% url 'post_edit' post.pk post.slug %}">Edit</a> | 
+<a href="{% url 'post_delete' post.pk post.slug %}">Delete</a></p> 
+
+
+    {% with comments.count as total_comments  %}
+        <h2>{{ total_comments }} comment{{ total_comments|pluralize }}</h2>
+    {% endwith %}
+{% for comment in comments %}
+    <div class="comment">
+        <p class="info">
+            Comment {{ forloop.counter }} by {{ comment.author }} on
+            {{ comment.created }}
+        </p>
+        {{ comment.comment|linebreaks }}
+    </div>
+{% empty %}
+    <p> There are no comments yet.</p>
+{% endfor %}
+
+{% if new_comment %}
+    <h2>Your comment has been added</h2>
+    
+{% else %}
+    <h2>Add a new comment</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <p><input type="submit" value="Add comment"></p>
+    </form>
+    
+{% endif %}
+<div class="w3-container">
+<h2>Similar posts</h2>
+{% for post in similar_posts %}
+    <p><a href="{{ post.get_absolute_url }}"> {{ post.title }}</a></p>
+{% empty %}
+    There are no similar posts yet.
+{% endfor %} <br/>
+Back to <a href="{% url 'post_list' %}">Forum</a>.
+</div>
+
+
+        {% post_to_twitter post.title post %} 
+        {% post_to_facebook post %}
+       
+
+        
+       
+
 {% endblock content %}
