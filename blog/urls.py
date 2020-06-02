@@ -10,7 +10,9 @@ from .views import (
 
     CommentUpdateView,
     CommentDeleteView,
+    post_search
 )
+from .feeds import LatesPostsFeed
 
 
 urlpatterns = [
@@ -30,6 +32,9 @@ urlpatterns = [
    path('<int:pk>/comment_edit/',
         CommentUpdateView.as_view(), name='comment_edit'),
    path('<int:pk>/comment_delete/', 
-        CommentDeleteView.as_view(), name='comment_delete')
+        CommentDeleteView.as_view(), name='comment_delete'),
+   path('feed/', LatesPostsFeed(), name='post_feed'),
+   path('search/', post_search, name='post_search')
+
     
 ]

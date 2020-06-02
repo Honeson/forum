@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load blog_tags %}
 {% load social_share %}
 {% load static %}
 
@@ -12,7 +13,7 @@
 <h1>{{ post.title }}</h1>  
 <p class="date">Published {{ post.publish }} by {{ post.author }}
 </p>
-{{ post.body|linebreaks }} 
+{{ post.body|markdown|linebreaks }} 
 <p><a href="{% url 'post_edit' post.pk post.slug %}">Edit</a> | 
 <a href="{% url 'post_delete' post.pk post.slug %}">Delete</a></p> 
 
@@ -25,6 +26,9 @@
         <p class="info">
             Comment {{ forloop.counter }} by {{ comment.author }} on
             {{ comment.created }}
+            <br/>
+            <a href="{% url 'comment_edit' comment.pk %}">Edit this comment</a>
+            <a href="{% url 'comment_delete' comment.pk %}">Delete this comment</a>
         </p>
         {{ comment.comment|linebreaks }}
     </div>
@@ -42,7 +46,7 @@
         {{ comment_form.as_p }}
         <p><input type="submit" value="Add comment"></p>
     </form>
-    
+   
 {% endif %}
 <div class="w3-container">
 <h2>Similar posts</h2>

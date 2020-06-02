@@ -30,4 +30,6 @@ class CommentForm(forms.ModelForm):
         fields = ('comment',)
 
 
-    
+class SearchForm(forms.Form):
+    query = forms.CharField()
+  

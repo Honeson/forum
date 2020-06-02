@@ -10,10 +10,12 @@ from django.db.models import Count
 
 from django.contrib.auth import get_user_model as user
 from taggit.models import Tag
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
+from django.contrib.postgres.search import TrigramSimilarity
 
 
 from .models import Post, Comment
-from .forms import CommentForm
+from .forms import CommentForm, SearchForm
 # Create your views here.
 
 
@@ -124,46 +126,6 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
 
 
 # view to handle my email sending form in forms.py
-'''
-def post_share(request, post_id):
-    post = get_object_or_404(Post, id=post_id, status='published')
-    sent = False
-    if request.method == 'POST':
-        form = EmailPostForm(request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-            post_url = request.build_absolute_uri(post.get_absolute_url())
-            subject = f"{cd['name']} recommends you read {post.title}"
-            message = f"Read {post.title} at {post_url}\n\n" f"{cd['name']}'s comments: {cd['comments']}"
-            send_mail(subject, message, 'admin@myblog.com', [cd['to']])
-            sent = True
-    else:
-        form = EmailPostForm()
-    return render(request, 'post_share.html', {'post': post, 'form': form, 'sent': sent})'''
-
-"""
-class EmailPostView(FormView):
-    form_class = EmailPostForm
-    template_name = 'post_share.html'
-    context_object_name = 'post'
-    success_url = reverse_lazy('email_sent')
-
-    def form_valid(self, form):
-        comments = "{name}/ {email} said: ".format(
-            name=form.cleaned_data.get('name'),
-            email=form.cleaned_data.get('email')
-        )
-        comments+= "\n\n{0}".format(form.cleaned_data.get('comments'))
-        
-        send_mail(
-            subject=form.cleaned_data.get('subject').strip(),
-            message=comments,
-            from_email='ashanti@gmail.com',
-            recipient_list=[form.cleaned_data.get('email')],
-        )
-        return super(EmailPostView, self).form_valid(form)
-"""
-
 
 class CommentUpdateView(UpdateView):
     model = Comment
@@ -175,6 +137,28 @@ class CommentDeleteView(DeleteView):
     model = Comment
     template_name = 'comment_delete.html'
     success_url = reverse_lazy('post_list')
+
+
+def post_search(request):
+    form = SearchForm()
+    query = None
+    results = []
+    if 'query' in request.GET:
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            search_vector = SearchVector('title', weight='A') + SearchVector('body', weight='B')
+            search_query = SearchQuery(query)
+            results = Post.published.annotate(
+                similarity=TrigramSimilarity('title', query),
+                ).filter(similarity__gt=0.1).order_by('-similarity')
+    return render(request,
+        'post_search.html',
+        {'form': form,
+        'query': query,
+        'results': results})
+
+
 
 
 

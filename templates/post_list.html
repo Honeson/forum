@@ -9,6 +9,7 @@
             <p>Developers forum</p>
 
         <h4>Total Posts: {% total_posts %}</h4>
+      
         <h4>Latest posts</h4>
         {% show_latest_posts 5 %} <br/>
 
@@ -26,6 +27,7 @@
             </li>
         {% endfor %}
         </ul>
+        <p><a href="{% url 'post_feed' %}">Subscribe to RSS feed</a></p>
     </div>
     <h1>Discussion</h1>
     {% if tag %}
@@ -42,7 +44,7 @@
     </p>
    
     <p class="date"> Published {{ post.publish }} by {{ post.author }}</p>    
-            {{ post.body|truncatewords:30|linebreaks }} 
+            {{ post.body|markdown|truncatewords_html:30 }} 
     {% endfor %}
    
     
