@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load humanize %}
 {% load blog_tags %}
 {% load social_share %}
 {% load static %}
@@ -10,12 +11,16 @@
 
 <link rel="stylesheet" href="{% static 'css/blog.css' %}">
 
+<div class="w3-container w3-card-4 w3-margin">
 <h1>{{ post.title }}</h1>  
-<p class="date">Published {{ post.publish }} by {{ post.author }}
+<p 
+class="date" style="color: blueviolet;">Published {{ post.publish | naturaltime }} by {{ post.author }}
 </p>
-{{ post.body|markdown|linebreaks }} 
-<p><a href="{% url 'post_edit' post.pk post.slug %}">Edit</a> | 
-<a href="{% url 'post_delete' post.pk post.slug %}">Delete</a></p> 
+{{ post.body|markdown|linebreaks }}
+{% if request.user == post.author %}
+    <p><a href="{% url 'post_edit' post.pk post.slug %}">Edit</a> | 
+    <a href="{% url 'post_delete' post.pk post.slug %}">Delete</a></p> 
+{% endif %}
 
 
     {% with comments.count as total_comments  %}
@@ -27,8 +32,10 @@
             Comment {{ forloop.counter }} by {{ comment.author }} on
             {{ comment.created }}
             <br/>
-            <a href="{% url 'comment_edit' comment.pk %}">Edit this comment</a>
-            <a href="{% url 'comment_delete' comment.pk %}">Delete this comment</a>
+            {% if request.user == comment.author %}
+                <a href="{% url 'comment_edit' comment.pk %}">Edit comment</a>|
+                <a href="{% url 'comment_delete' comment.pk %}">Delete comment</a>
+            {% endif %}
         </p>
         {{ comment.comment|linebreaks }}
     </div>
@@ -58,7 +65,7 @@
 Back to <a href="{% url 'post_list' %}">Forum</a>.
 </div>
 
-
+</div>
         {% post_to_twitter post.title post %} 
         {% post_to_facebook post %}
        

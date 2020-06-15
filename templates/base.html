@@ -17,6 +17,7 @@
 </head> 
 <body> 
         <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4"> 
+            <img src="{% static 'image/logo.png' %}" alt="logo" style="height:50px; float: left; margin-right: 7px;"> 
             <a class="navbar-brand" href="{% url 'home' %}">Developers</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" 
                 data-target="#navbarCollapse" aria-controls="navbarCollapse" 
@@ -26,10 +27,11 @@
             <div class="collapse navbar-collapse" id="navbarCollapse"> 
                 {% if user.is_authenticated %} 
                 <ul class="navbar-nav mr-auto"> 
-                    <li class="nav-item"><a href="{% url 'post_new' %}">+ New post</a></li>
+                    <li class="nav-item"><a href="{% url 'post_new' %}">
+                        <button class="w3-button w3-circle w3-blue w3-hover-green">+ New post</button></a></li>
                 </ul> 
                 <ul class="navbar-nav mr-auto"> 
-                    <li class="nav-item"><a href="{% url 'post_list' %}">Go to Discussion </a></li> 
+                    <li class="nav-item"><a href="{% url 'post_list' %}">Forum </a></li> 
                 </ul>
                 <ul class="navbar-nav mr-auto"> 
                     <li class="nav-item"><a href="{% url 'post_search' %}">Search for topics </a></li> 
@@ -41,7 +43,7 @@
                     <li class="nav-item"><a href="#">About Us </a></li> 
                 </ul>
                 <ul class="navbar-nav mr-auto"> 
-                    <li class="nav-item"><a href="#">Contact Us</a></li> 
+                    <li class="nav-item"><a href="{% url 'contact' %}">Contact Us</a></li> 
                 </ul>
                     <ul class="navbar-nav ml-auto"> 
                         <li class="nav-item"> 
@@ -71,10 +73,17 @@
                 {% endif %}
             </div>
         </nav>
-        <div class="container"> 
+
+        
+        
             {% block content %} 
             {% endblock content %}
-        </div>
+            
+            <div class="w3-container w3-black w3-margin"><p> is a footer
+                this footer is to small ooo
+                <p>This will be anotehr content</p>
+                <p>This will be anotehr content</p>
+            </p></div>
 
     <!-- Optional JavaScript --> 
    <!-- <jQuery first, then Popper.js, then Bootstrap JS -->

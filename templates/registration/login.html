@@ -1,11 +1,38 @@
 {% extends 'base.html' %}
+{% load static  %}
+{% load widget_tweaks %}
 {% block title %}Log In{% endblock title %}
 {% block content %}
-    <h2>Log In</h2> 
-    <form method="post"> 
-        {% csrf_token %} 
-        {{ form.as_p }}
+     
+<div class="w3-row w3-card-4 w3-sand w3-margin">
 
-    <button class="btn btn-success ml-" type="submit">Log In</button>  
-    <strong><a href="{% url 'password_reset' %}">Forgot your password?</a> </strong> 
+    <div class="w3-col w3-teal"
+    style="width: 50%;">
+        <div class="w3-container w3-blue w3-center w3-round">
+            SIGN IN TO YOUR ACCOUNT
+        </div>
+        <form method="POST" class="w3-margin">
+            {% csrf_token %}
+            {% include 'bs4_form.html' with form=form %}
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+        <a href="{% url 'password_reset' %}"><i class="w3-text-orange w3-margin"> Forgot Your Password?</i></a>
+        <em class="w3-right">Don't Have An Account?
+            <a href="{% url 'signup' %}">
+                <button class="w3-btn w3-blue w3-hover-teal w3-round w3-margin">Sign UP</button>
+            </a>
+        </em>
+    </div>
+
+    <img src="{% static 'image/man-in-white.jpg' %}" alt="login"
+        class="w3-col w3-image w3-animate-fading"
+        style="width: 50%; height: 400px;">
+        
+    </div>
+    <div class="w3-container w3-red w3-margin">Something bad is happening here
+        what the fuck is happening here <br/>
+        what the fuck is happening here <br/>
+        what the fuck is happening here <br/>
+    </div>
+
 {% endblock content %}

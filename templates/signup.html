@@ -1,15 +1,27 @@
 {% extends 'base.html' %}
-
-{% load crispy_forms_tags %}
-
-{% block title %}Signup{% endblock title %}
-
+{% load static %}
+{% block title %}Sign Up{% endblock title %}
 {% block content %}
-    <h2>Signup Here</h2>
+<div class="w3-row">
+    <img src="{% static 'image/man-wearing-gray.jpg' %}" alt="signup"
+    class="w3-half w3-image w3-animate-fading"
+    style="height: 793px;">
 
-    <form method="POST">
-        {% csrf_token %}
-        {{form|crispy}}
-        <button class="btn btn-success" type="submit">signup</button>
-    </form>
+<div class="w3-half w3-container w3-card-4 w3-light-blue">
+<div class="w3-container w3-blue w3-center w3-round">
+    SIGN UP FOR A FREE ACCOUNT HERE
+</div>
+<form method="POST">
+    {% csrf_token %}
+    {% include 'bs4_form.html' with form=form %}
+    <button type="submit" class="btn btn-primary">Signup</button>
+</form>
+<em class="w3-right">Already Have An Account? 
+    <a href="{% url 'login' %}">
+        <button class="w3-btn w3-blue w3-hover-teal w3-round w3-margin-bottom">Login</button>
+    </a>
+</em>
+</div>
+</div>
+
 {% endblock content %}

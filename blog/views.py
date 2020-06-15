@@ -58,7 +58,7 @@ def post_detail(request, post, pk):
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'post_new.html'
-    fields = ('title', 'body', 'status',)
+    fields = ('title', 'body',)
     login_url = 'login'
 
     def form_valid(self, form):
@@ -83,6 +83,7 @@ def post_list(request, tag_slug=None):
         object_list = object_list.filter(tags__in=[tag])
 
     paginator = Paginator(object_list, 5) # 5 posts in each page
+    is_paginated = True if paginator.num_pages > 1 else False
     page = request.GET.get('page')
     try:
         posts = paginator.page(page)
@@ -95,6 +96,8 @@ def post_list(request, tag_slug=None):
     return render(request,
                  'post_list.html',
                  {'page': page,
+                 'is_pagenated': is_paginated,
+                 'paginator': paginator,
                   'posts': posts,
                   'tag': tag})
 

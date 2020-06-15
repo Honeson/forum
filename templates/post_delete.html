@@ -5,6 +5,7 @@
         {% csrf_token %} 
         <p>Are you sure you want to delete "{{ post.title }}"?</p>
         <button class="btn btn-danger ml-2" type="submit">Confirm</button> 
-        <a style="color: blue" href="{% url 'post_detail' post.pk post.slug %}">Take me back</a>
+        <a style="color: blue" href="{% url 'post_detail' post.pk post.slug %}"
+        class="btn btn-secondary">Take me back</a>
     </form> 
 {% endblock content %}

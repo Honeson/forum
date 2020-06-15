@@ -1,0 +1,106 @@
+{% load static %}
+
+<!doctype html> 
+<html lang="en"> 
+    <head> 
+    <!-- Required meta tags --> 
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'css/W3.css' %}">
+    <!-- Bootstrap CSS --> 
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    
+   
+
+    
+    <title>{% block title %}Developers forum{% endblock title %}</title> 
+</head> 
+<body> 
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 fixed-top leftbar">
+        <img src="{% static 'image/logo.png' %}" alt="logo" style="height:50px; float: left; margin-right: 7px;"> 
+        <a class="navbar-brand" href="{% url 'home' %}">Developers</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" 
+            data-target="#navbarCollapse" aria-controls="navbarCollapse" 
+            aria-expanded="false" aria-label="Toggle navigation"> 
+            <span class="navbar-toggler-icon"></span>
+        </button> 
+        <div class="collapse navbar-collapse" id="navbarCollapse"> 
+            {% if user.is_authenticated %} 
+            <ul class="navbar-nav mr-auto"> 
+                <li class="nav-item"><a href="#">FAQs </a></li> 
+            </ul>
+            <ul class="navbar-nav mr-auto"> 
+                <li class="nav-item"><a href="{% url 'post_list' %}">Forum</a></li>
+            </ul> 
+            <ul class="navbar-nav mr-auto"> 
+                <li class="nav-item"><a href="#">About Us </a></li> 
+            </ul>
+            <ul class="navbar-nav mr-auto"> 
+                <li class="nav-item"><a href="{% url 'contact' %}">Contact Us</a></li> 
+            </ul>
+            <ul class="navbar-nav ml-auto"> 
+                <li class="nav-item"> 
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="userMenu"
+                        aria-expanded="false"> 
+                        {{ user.username }} 
+                    </a> 
+                    <div class="dropdown-menu dropdown-menu-right" 
+                        aria-labelledby="userMenu"> 
+                        <a class="dropdown-item" 
+                        href="{% url 'password_change'%}">Change password</a> 
+                        <div class="dropdown-divider"></div> 
+                            <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
+                        </div>
+                </li>
+                </ul>
+                    
+            {% else %}
+                <form class="form-inline ml-auto"> 
+                    <a href="{% url 'login' %}" class="btn btn-outline-secondary">Log In</a> 
+                    <a href="{% url 'signup' %}" class="btn btn-primary ml-4">Sign up</a> 
+                </form>
+            {% endif %}
+        </div>
+     </nav>
+
+
+    <div class="w3-display-container">
+        
+        <img src="{% static 'image/ai1.jpg' %}" alt="image"
+        style="height: 980px; width: 100%;"
+        class="w3-grayscale-max w3-animate-fading">
+        <div class="w3-display-topmiddle w3-container w3-card-4 w3-blue w3-round w3-mobile"
+            style="width:60%; margin-top: 90px;">
+            <p>SEND US A MESSAGE AND WE WILL BE HAPPY TO GIVE YOU RESPONSE. <br/>
+                NEED WEBSITE OF ANY KIND, CONTACT US NOW
+            </p>        
+        </div>
+        <div class="w3-display-topmiddle w3-container w3-card-4 w3-light-grey w3-text-blue" 
+        style="width: 60%; margin-top: 150px;">
+        <form method="post">
+            <h2 class="w3-center w3-wide">Contact Us</h2>
+        
+            {% csrf_token %}
+            {% include 'bs4_form.html' with form=form %}
+                <button type="submit" 
+                    class="w3-button w3-block w3-section 
+                    w3-blue w3-ripple w3-padding w3-wide
+                    w3-hover-teal">Get in Touch</button>
+        </form>
+        </div>
+    </div>
+
+    <div class="w3-container w3-black">
+        <h3>footer</h3>
+        <p>this will be my footer</p>
+    </div>
+
+          
+<!-- Optional JavaScript --> 
+   <!-- <jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script> 
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>  
+</body>
+</html>

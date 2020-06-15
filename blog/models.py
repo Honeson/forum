@@ -30,7 +30,7 @@ class Post(models.Model):
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='published')
     objects = models.Manager()
     published = PublishedManager()
     tags = TaggableManager()
@@ -64,6 +64,6 @@ class Comment(models.Model):
         return f'Comment by {self.author} on {self.post}'
     
     def get_absolute_url(self):
-        return reverse('post_detail', args=[str(self.id)])
+        return reverse('post_list')
 
  

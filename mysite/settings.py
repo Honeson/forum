@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django_social_share',
     'taggit',
     'django.contrib.postgres',
+    'widget_tweaks',
     
 
     'django.contrib.admin',
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.sitemaps',
+    'django.contrib.humanize',
 
     
 ]

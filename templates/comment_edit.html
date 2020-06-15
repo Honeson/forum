@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
 {% block content %} 
-    <h1>Edit</h1> 
+
+<div class="w3-container w3-card-4 w3-margin">
+    <h1>Edit this comment</h1> 
     <form method="post">
         {% csrf_token %} 
-        {{ form.as_p }} 
+        {% include 'bs4_form.html' with form=form %}
         <button class="btn btn-info ml-" type="submit">Update</button> 
     </form> 
+    <a href="{% url 'post_list' %}" class="btn btn-secondary w3-margin">Back to forum</a>
+</div>
 {% endblock content %}

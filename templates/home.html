@@ -1,29 +1,247 @@
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<!-- Required meta tags -->
-<meta charset="utf-8"> 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="{% static 'css/W3.css' %}">
+<!doctype html> 
+<html lang="en"> 
+    <head> 
+    <!-- Required meta tags --> 
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'css/W3.css' %}">
+    <!-- Bootstrap CSS --> 
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    
+   
 
-<title>Home</title>
-</head>
-<body>
-
-
-    <div class="w3-bar w3-mobile w3-black">
-        <a href="{% url 'home' %}">Home</a>
-        <a href="{% url 'post_new' %}">+ New post</a>
+    
+    <title>{% block title %}Developers forum{% endblock title %}</title> 
+</head> 
+<body> 
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 fixed-top leftbar">
+        <img src="{% static 'image/logo.png' %}" alt="logo" style="height:50px; float: left; margin-right: 7px;"> 
+        <a class="navbar-brand" href="{% url 'home' %}">Developers</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" 
+            data-target="#navbarCollapse" aria-controls="navbarCollapse" 
+            aria-expanded="false" aria-label="Toggle navigation"> 
+            <span class="navbar-toggler-icon"></span>
+        </button> 
+        <div class="collapse navbar-collapse" id="navbarCollapse"> 
+            {% if user.is_authenticated %} 
+            <ul class="navbar-nav mr-auto"> 
+                <li class="nav-item"><a href="#">FAQs </a></li> 
+            </ul>
+            <ul class="navbar-nav mr-auto"> 
+                <li class="nav-item"><a href="{% url 'post_list' %}">Forum</a></li>
+            </ul> 
+            <ul class="navbar-nav mr-auto"> 
+                <li class="nav-item"><a href="#">About Us </a></li> 
+            </ul>
+            <ul class="navbar-nav mr-auto"> 
+                <li class="nav-item"><a href="{% url 'contact' %}">Contact Us</a></li> 
+            </ul>
+            <ul class="navbar-nav ml-auto"> 
+                <li class="nav-item"> 
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="userMenu"
+                        aria-expanded="false"> 
+                        {{ user.username }} 
+                    </a> 
+                    <div class="dropdown-menu dropdown-menu-right" 
+                        aria-labelledby="userMenu"> 
+                        <a class="dropdown-item" 
+                        href="{% url 'password_change'%}">Change password</a> 
+                        <div class="dropdown-divider"></div> 
+                            <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
+                        </div>
+                </li>
+                </ul>
+                    
+            {% else %}
+                <form class="form-inline ml-auto"> 
+                    <a href="{% url 'login' %}" class="btn btn-outline-secondary">Log In</a> 
+                    <a href="{% url 'signup' %}" class="btn btn-primary ml-4">Sign up</a> 
+                </form>
+            {% endif %}
+        </div>
+     </nav>
+        
+            
+<div class="w3-display-container w3-sand">
+    <img src="{% static 'image/group.jpg' %}" alt="Lights" 
+        style="height: 500px; width: 100%;"
+        class="w3-grayscale">
+        
+    <div class="w3-display-topleft w3-wide w3-mobile" 
+        style="margin-top: 70px;">
+        <div class="wordart welcome">
+            <span class="text">WELCOME</span>
+        </div>
+        <div class="wordart to">
+            <span class="text">TO</span>
+        </div>
+        <div class="wordart codeck">
+            <span class="text">CODECK</span>
+        </div>
+                
     </div>
-    {% if user.is_authenticated %} 
-        Hi {{ user.username }}! 
-        <p><a href="{% url 'logout' %}">Log Out</a></p> 
-    {% else %} 
-        <p>You are not logged in</p> 
-        <a href="{% url 'login' %}">Log In</a> | 
-        <a href="{% url 'signup' %}">Sign Up</a>
-    {% endif %} 
 
-</body>
+
+
+    <div class="w3-display-topmiddle" style="margin-top: 220px;">
+        <div class="wordart where">
+            <span class="text">WHERE</span>
+        </div>
+    </div>
+
+    <div class="w3-display-topright" style="margin-top: 300px;">
+        <div class="wordart CODERS">
+            <span class="text">CODERS</span>
+        </div>
+        <div class="wordart meet">
+            <span class="text">MEET</span>
+        </div>
+    </div>
+
+    {% if user.is_authenticated %}
+        <div class="w3-bar">
+            <button class="w3-margin w3-sand" style="border: 0px;">
+                Hello {{user.username}}
+            </button>
+            <button class="w3-button w3-margin w3-blue w3-hover-orange w3-right">
+                <a href="{% url 'post_list' %}" class="w3-text-white" 
+                style="text-decoration: none;">Join Discussion</a>
+            </button>
+        </div>
+    {% else %}
+        <div class="w3-bar">
+            <button class="w3-button w3-margin w3-blue w3-hover-orange">
+                <a href="{% url 'signup' %}" class="w3-text-white" style="text-decoration: none;">JOIN US NOW</a>
+            </button>
+            <button class="w3-button w3-margin w3-blue w3-hover-orange w3-right">
+                <a href="{% url 'login' %}" class="w3-text-white" style="text-decoration: none;">SIGN IN</a>
+            </button>
+        </div>
+    {% endif %}
+
+</div>
+
+<div class="w3-container w3-pale-blue w3-leftbar w3-border-blue">
+    <h2 class="w3-center w3-text-blue"> WHAT WE DO</h2>
+    <h5>Our goal is to bridge the gap between professionals and beginners in computer programming.
+        Despite the fact that many resources are made available in the internet for aspiring and 
+        beginners in the programming space to utilize, many are still finding it very difficult 
+        to understand and cope with them. The internet can be overwhelming for beginners, hence, there's need to
+        adequately help people in this category.</h5>
+    </p>
+    <h5>
+        We are made up of developers from all fields of programming and the world of technology
+        ranging from Python, C++, Java, PHP, HTML,CSS,
+        and any aspect of programming background. At Codeck, we consist programmers from all over the
+        with diverse knowledge in all areas of the programming paradigm.
+    </h5>
+</div>
+
+<div class="w3-container w3-pale-green w3-rightbar w3-border-blue">
+    <h2 class="w3-center w3-text-blue"> WHY JOIN US</h2>
+    <h5>
+        We are family that listeins to one another's problems. We are not formal people who just mind their 
+        businesses. We give all equall opportunity to grow. We are not like the big platform where one asks
+        questions and wait till who knows when, for answers. As soon as your post your challange in our forum,
+        you're guaranted of some answers within a short time.
+        <p>
+            You are not only limited to asking questions, you can voice out your coding progress or achievements
+            while members celebrate you with their comments.
+        </p>
+            <p>
+                Are you already a professional in a particular filed, meet other professionals in this Forum
+                plus you can equally develop skills in other areas where others professionals will be sharing their 
+                progress.
+            </p>
+            <p>
+                Are you a beginner in a given field of technology, we are to clean off <em>beginner</em> from you and
+                make you a pro in the shortest available time in any programming language of interest.
+            </p>
+            <p>
+                Are you a data scientist or big data lover, at Codeck, you'll meet like minded people from 
+                all part of the world who will help you develop and deploy your interest.
+            </p>
+    </h5>
+</div>
+  
+  
+            
+
+<div class="w3-row w3-border">
+    <div class="w3-half">
+        <a href="{% url 'signup' %}">
+            <img src="{% static 'image/head.jpg' %}" alt="head" 
+            class="w3-image w3-hover-opacity w3-animate-right">
+        </a>
+        <p>programming can be hectic when you don't have anyone to discuss your challanges with. 
+        At Codeck, we are out to stand for one another and make sure you don't suffer hard and long 
+        before getting help. Bring your coding challanges and get help faster.</p>
+    </div>
+
+    <div class="w3-half">
+        <a href="{% url 'signup' %}">
+        <img src="{% static 'image/children.jpg' %}" alt="children" 
+        class="w3-image w3-hover-opacity w3-animate-left">
+        </a>
+        We don't only answer your questions but also rejoice with you when you avhieve something great
+        in the programming sphere. We help suggest better practice you can follow for optimum result 
+        in your programming career. We are committed to making your programming journey easier, thereby
+        achieving your goals faster.
+        Join us <a href="{% url 'signup' %}" style="text-decoration: none;">here</a> and see how far you'll go.
+    </div>          
+</div>
+
+
+            
+        <div class="w3-panel">
+            {% block content %} 
+            {% endblock content %}
+        </div>
+<div class="w3-container w3-black w3- card">  
+    <div class="w3-row">
+        <div class="w3-card w3-quarter w3-center">
+            <h5>Other places to get programming help</h5>
+            <p>
+                <a href="#">Stackoverflow</a><br/>
+                <a href="#">Quora</a><br/>
+            </p>
+        </div>
+        <div class="w3-card w3-quarter w3-center">
+            <h5>Work as a freelancer</h5>
+            <p>
+                <a href="#">first</a><br/>
+                <a href="#">second</a><br/>
+                <a href="#">third</a><br/>
+            </p>
+        </div>
+        <div class="w3-card w3-quarter w3-center">
+            <h5>Scholarships</h5>
+            <p>
+                <a href="#">Link 1</a><br/>
+                <a href="#">link 2</a><br/>
+                <a href="#">Link n</a><br/>
+
+            </p>
+        </div>
+        <div class="w3-card w3-quarter w3-center">
+            <h5>Something else</h5>
+            <p>
+                <a href="#">one</a><br/>
+                <a href="#">two</a><br/>
+                <a href="#">three</a><br/>
+            </p>
+        </div>
+    </div>
+    <p class="w3-center"> Copyright - 2020 Codeck</p>
+</div>
+    <!-- Optional JavaScript --> 
+   <!-- <jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+        <script src="{% static 'js/popper.min.js' %}"></script> 
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>  
+      
+</body> 
+</html>
