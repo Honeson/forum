@@ -33,7 +33,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'vb#y^ws+4s_-^9n@^-jlz=1o8hali%
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['instantcode.herokuapp.com', '127.0.0.1']
 SITE_ID = 1
 INSTALLED_APPS = [
     # Local apps
@@ -148,9 +148,9 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATIC_URL = '/static/'
-#STATICFILES_DIRS = [
-#   os.path.join(BASE_DIR, 'static'),
-#]
+STATICFILES_DIRS = [
+   os.path.join(BASE_DIR, 'static'),
+]
 AUTH_USER_MODEL = 'users.CustomUser'
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
