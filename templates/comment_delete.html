@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% block content %} 
-<div class="w3-container w3-card-4 w3-margin">
+<div class="w3-container">
     <h1>Delete</h1> 
     <form method="post">
         {% csrf_token %} 
         <p>Are you sure you want to delete "{{ comment.comment }}"?</p> 
         <button class="btn btn-danger ml-2" type="submit">Confirm</button> 
     </form> 
-    <a href="{% url 'post_list' %}" class="btn btn-secondary">Back to forum</a>
+    <a href="{% url 'post_list' %}" class="btn btn-secondary w3-margin">Back to forum</a>
 
 </div>
 {% endblock content %}

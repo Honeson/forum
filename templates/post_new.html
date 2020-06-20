@@ -3,7 +3,7 @@
 <div class="w3-container w3-card w3-margin">
     <div>
         <h2>Ask a question or share knowledge with others</h2>
-        <note class="w3-text-blue"> Enclose your post in * * for bold, ** ** for italics, ``` ``` for code</note>
+        <note class="w3-text-blue"> *<b>bold</b>*  <i>**italics**</i> <code>```code ```</code></note>
         <form action="" method="post">
             {% csrf_token %}
             {% include 'bs4_form.html' with form=form %}

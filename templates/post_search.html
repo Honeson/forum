@@ -6,6 +6,8 @@
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+<div class="w3-container w3-card-4 w3-margin">
     {% if query %}
         <h1>Posts containing "{{ query}}"</h1>
         <h3>
@@ -21,13 +23,16 @@
         {% endfor %}
         <p><a href="{% url 'post_search' %}">Search Again</a></p>
     {% else %}
+   
         <h1>Search for posts.</h1>
         <form method="GET">
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Search">
         </form>
+   
     {% endif %}
+</div>
 {% endblock content %}
 
        

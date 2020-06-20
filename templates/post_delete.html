@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
+{% block title %}Delete {{post.title}} {% endblock title %}
+
 {% block content %} 
+<div class="w3-container w3-margin">
     <h1>Delete</h1> 
     <form action="" method="post">
         {% csrf_token %} 
@@ -8,4 +11,11 @@
         <a style="color: blue" href="{% url 'post_detail' post.pk post.slug %}"
         class="btn btn-secondary">Take me back</a>
     </form> 
+</div>
+<div class="w3-container w3-card-4 w3-center w3-sand w3-padding">
+<a href="https://www.mlmgateway.com/?refcode=56744223" 
+target="_yop"><img src="https://www.mlmgateway.com/images/banners/mlmgateway/336x280.gif" 
+alt="MLM Gateway - Helping network marketers build their business" 
+title="MLM Gateway" width="336" height="280" /></a>
+</div>
 {% endblock content %}

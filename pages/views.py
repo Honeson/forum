@@ -35,3 +35,7 @@ class SuccessView(TemplateView):
 def successView(request):
     return HttpResponse("Success! Thank you for your message.")
 '''
+
+
+class AboutUsView(TemplateView):
+    template_name = 'about_us.html'

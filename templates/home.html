@@ -14,12 +14,13 @@
    
 
     
-    <title>{% block title %}Developers forum{% endblock title %}</title> 
+    <title>InstaCode</title> 
 </head> 
 <body> 
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 fixed-top leftbar">
-        <img src="{% static 'image/logo.png' %}" alt="logo" style="height:50px; float: left; margin-right: 7px;"> 
-        <a class="navbar-brand" href="{% url 'home' %}">Developers</a>
+        <a class="navbar-brand" href="{% url 'home' %}"> <img src="{% static 'image/instacode.png' %}" 
+            alt="logo" style="height:50px; float: left; margin-right: 7px;"></a>
+            <a class="navbar-brand" href="{% url 'home' %}"> InstaCode</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" 
             data-target="#navbarCollapse" aria-controls="navbarCollapse" 
             aria-expanded="false" aria-label="Toggle navigation"> 
@@ -27,14 +28,12 @@
         </button> 
         <div class="collapse navbar-collapse" id="navbarCollapse"> 
             {% if user.is_authenticated %} 
-            <ul class="navbar-nav mr-auto"> 
-                <li class="nav-item"><a href="#">FAQs </a></li> 
-            </ul>
+            
             <ul class="navbar-nav mr-auto"> 
                 <li class="nav-item"><a href="{% url 'post_list' %}">Forum</a></li>
             </ul> 
             <ul class="navbar-nav mr-auto"> 
-                <li class="nav-item"><a href="#">About Us </a></li> 
+                <li class="nav-item"><a href="{% url 'about_us' %}">About Us </a></li> 
             </ul>
             <ul class="navbar-nav mr-auto"> 
                 <li class="nav-item"><a href="{% url 'contact' %}">Contact Us</a></li> 
@@ -56,6 +55,12 @@
                 </ul>
                     
             {% else %}
+            <ul class="navbar-nav mr-auto"> 
+                <li class="nav-item"><a href="{% url 'about_us' %}">About Us </a></li> 
+            </ul>
+            <ul class="navbar-nav mr-auto"> 
+                <li class="nav-item"><a href="{% url 'contact' %}">Contact Us</a></li> 
+            </ul>
                 <form class="form-inline ml-auto"> 
                     <a href="{% url 'login' %}" class="btn btn-outline-secondary">Log In</a> 
                     <a href="{% url 'signup' %}" class="btn btn-primary ml-4">Sign up</a> 
@@ -66,7 +71,7 @@
         
             
 <div class="w3-display-container w3-sand">
-    <img src="{% static 'image/group.jpg' %}" alt="Lights" 
+    <img src="{% static 'image/cover-1.png' %}" alt="Lights" 
         style="height: 500px; width: 100%;"
         class="w3-grayscale">
         
@@ -79,7 +84,7 @@
             <span class="text">TO</span>
         </div>
         <div class="wordart codeck">
-            <span class="text">CODECK</span>
+            <span class="text">INSTACODE</span>
         </div>
                 
     </div>
@@ -126,42 +131,48 @@
 
 <div class="w3-container w3-pale-blue w3-leftbar w3-border-blue">
     <h2 class="w3-center w3-text-blue"> WHAT WE DO</h2>
-    <h5>Our goal is to bridge the gap between professionals and beginners in computer programming.
+    <h5  style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Our goal is to bridge the gap between professionals and beginners in computer programming.
         Despite the fact that many resources are made available in the internet for aspiring and 
         beginners in the programming space to utilize, many are still finding it very difficult 
         to understand and cope with them. The internet can be overwhelming for beginners, hence, there's need to
         adequately help people in this category.</h5>
-    </p>
-    <h5>
+    <h5  style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 
+    'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"> 
         We are made up of developers from all fields of programming and the world of technology
         ranging from Python, C++, Java, PHP, HTML,CSS,
-        and any aspect of programming background. At Codeck, we consist programmers from all over the
+        and any aspect of programming background. At InstaCode, we consist programmers from all over the world
         with diverse knowledge in all areas of the programming paradigm.
     </h5>
 </div>
 
 <div class="w3-container w3-pale-green w3-rightbar w3-border-blue">
     <h2 class="w3-center w3-text-blue"> WHY JOIN US</h2>
-    <h5>
+    <h5  style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 
+    'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
         We are family that listeins to one another's problems. We are not formal people who just mind their 
         businesses. We give all equall opportunity to grow. We are not like the big platform where one asks
         questions and wait till who knows when, for answers. As soon as your post your challange in our forum,
         you're guaranted of some answers within a short time.
-        <p>
+        <p class="w3-large" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 
+        'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
             You are not only limited to asking questions, you can voice out your coding progress or achievements
             while members celebrate you with their comments.
         </p>
-            <p>
+            <p class="w3-large" style="font-family: 'Lucida Sans', 'Lucida Sans Regular',
+             'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
                 Are you already a professional in a particular filed, meet other professionals in this Forum
                 plus you can equally develop skills in other areas where others professionals will be sharing their 
                 progress.
             </p>
-            <p>
+            <p class="w3-large" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+             'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
                 Are you a beginner in a given field of technology, we are to clean off <em>beginner</em> from you and
                 make you a pro in the shortest available time in any programming language of interest.
             </p>
-            <p>
-                Are you a data scientist or big data lover, at Codeck, you'll meet like minded people from 
+            <p class="w3-large" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 
+            'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+                Are you a data scientist or big data lover, at InstaCode, you'll meet like minded people from 
                 all part of the world who will help you develop and deploy your interest.
             </p>
     </h5>
@@ -176,8 +187,9 @@
             <img src="{% static 'image/head.jpg' %}" alt="head" 
             class="w3-image w3-hover-opacity w3-animate-right">
         </a>
-        <p>programming can be hectic when you don't have anyone to discuss your challanges with. 
-        At Codeck, we are out to stand for one another and make sure you don't suffer hard and long 
+        <p class="w3-large" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+        programming can be hectic when you don't have anyone to discuss your challanges with. 
+        At InstaCode, we are out to stand for one another and make sure you don't suffer hard and long 
         before getting help. Bring your coding challanges and get help faster.</p>
     </div>
 
@@ -186,11 +198,14 @@
         <img src="{% static 'image/children.jpg' %}" alt="children" 
         class="w3-image w3-hover-opacity w3-animate-left">
         </a>
+        <p class="w3-large" 
+        style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 
+        Geneva, Verdana, sans-serif;">
         We don't only answer your questions but also rejoice with you when you avhieve something great
         in the programming sphere. We help suggest better practice you can follow for optimum result 
         in your programming career. We are committed to making your programming journey easier, thereby
         achieving your goals faster.
-        Join us <a href="{% url 'signup' %}" style="text-decoration: none;">here</a> and see how far you'll go.
+        Join us <a href="{% url 'signup' %}" style="text-decoration: none;">here</a> and see how far you'll go.</p>
     </div>          
 </div>
 
@@ -205,37 +220,78 @@
         <div class="w3-card w3-quarter w3-center">
             <h5>Other places to get programming help</h5>
             <p>
-                <a href="#">Stackoverflow</a><br/>
-                <a href="#">Quora</a><br/>
+                <a href="https://www.stackoverflow.com" target="_blank">Stackoverflow</a><br/>
+                <a href="https://www.quora.com" target="_blank">Quora</a><br/>
+                <a href="https://www.reddit.com" target="_blank">Reddit</a><br/>
+                <a href="https://www.stackexchange.com" target="_blank">StackExchange</a><br/>
+                <a href="https://www.codeproject.com" target="_blank">CodeProject</a><br/>
+                <a href="https://www.groups.google.com" target="_blank">Google Groups</a><br/>
+                <a href="https://www.coderanch.com" target="_blank">CodeRanch</a><br/>
+                <a href="https://www.programmersheaven.com" target="_blank">Programmers Heaven</a><br/>
+                <a href="https://www.findnerd.com" target="_blank">FindNerd</a><br/>
+                <a href="https://www.chegg.com" target="_blank">Chegg</a><br/>
             </p>
         </div>
         <div class="w3-card w3-quarter w3-center">
-            <h5>Work as a freelancer</h5>
+            <h5>Remote Work</h5>
             <p>
-                <a href="#">first</a><br/>
-                <a href="#">second</a><br/>
-                <a href="#">third</a><br/>
+                <a href="https://www.angellist.com" target="_blank">AngelList</a><br/>
+                <a href="https://www.remote.com" target="_blank">Remote</a><br/>
+                <a href="https://www.weworkremotely.com" target="_blank">WeWorkRemotely</a><br/>
+                <a href="https://www.remote.co" target="_blank">Remote.co</a><br/>
+                <a href="https://www.jobpressco.co" target="_blank">JobPressco</a><br/>
+                <a href="https://www.github.com" target="_blank">GitHub</a><br/>
+                <a href="https://www.fiverr.com" target="_blank">Fiverr</a><br/>
+                <a href="https://www.upwork.com" target="_blank">Upwork</a><br/>
+                <a href="https://www.upwork.ng" target="_blank">UpworkNg</a><br/>
+                <a href="https://www.guru.com" target="_blank">Guru</a><br/>
+                <a href="https://www.eworker.co" target="_blank">Eworker</a><br/>
+                
             </p>
         </div>
         <div class="w3-card w3-quarter w3-center">
-            <h5>Scholarships</h5>
+            <h5>Programming Scholarships</h5>
             <p>
-                <a href="#">Link 1</a><br/>
-                <a href="#">link 2</a><br/>
-                <a href="#">Link n</a><br/>
+                <a href="https://www.microsoft.com/en-us/diversity/programs/blacks-scholarships.aspx" 
+                target="_blank">Blacks at Microsoft Scholarships</a><br/>
+                <a href="http://www.aises.org/scholarships" target="_blank">AISES Intel Scholarship Fund</a><br/>
+                <a href="https://www.aim.applyISTS.net/esaf" target="_blank">ESA Foundation Scholarships</a><br/>
+                <a href="http://www.course.com/webwarrior/rules.cfm" target="_blank">Web Warrior Scholarship</a><br/>
+                <a href="http://www.ruraltechfund.org/rtf-scholarships/" target="_blank">Judy Shankle Scholarship</a><br/>
+                <a href="http://www.newtarget.com/scholarship-fund-alexandria" 
+                target="_blank">New Target Internet Scholarship</a><br/>
+                <a href="https://www.community.hpe.com/t5/Grounded-in-the-Cloud/
+                OpenStackscholarship-program-advancing-the-next-generation-of/ba-p/6780601#.WIO1Qzl9n0" 
+                target="_blank">HP Helion OpenStack Scholarship</a><br/>
+                <a href="https://www.code.google.com/codejam" target="_blank">Google Code Jam Competition</a><br/>
+                <a href="https://www.nfb.org/scholarship-list" target="_blank">Oracle Scholarship</a><br/>
+                <a href="https://www.webucator.com/scholarships/index.cfm" 
+                target="_blank">Webucator Scholarship</a><br/>
+                <a href="https://www.worldscholarshipforum.com/programming-scholarships" 
+                target="_blank">More Scholarships</a><br/>
 
             </p>
         </div>
         <div class="w3-card w3-quarter w3-center">
-            <h5>Something else</h5>
+            <h5> Jobs sites</h5>
             <p>
-                <a href="#">one</a><br/>
-                <a href="#">two</a><br/>
-                <a href="#">three</a><br/>
+                <a href="https://www.careerbuilder.com" target="_blank">CareerBuilder</a><br/> 
+                <a href="https://www.dice.com" target="_blank">Dice</a><br/>
+                <a href="https://www.grassdoor.com/index.htm" target="_blank">Grassdoor</a><br/> 
+                <a href="https://www.googleforjobs.com/about/" target="_blank">GoogleforJobs</a><br/>
+                <a href="https://www.idealist.org/en/" target="_blank">Idealist</a><br/>
+                <a href="https://www.indeed.com" target="_blank">Indeed</a><br/>
+                <a href="https://www.linkup.com" target="_blank">Linkup</a><br/>
+                <a href="https://www.about.linkedin.com" target="_blank">Linkedin</a><br/>
+                <a href="https://www.job.com" target="_blank">Job</a><br/>
+                <a href="https://www.theladders.com" target="_blank">Ladders</a><br/>
+                <a href="https://www.snagajob.com" target="_blank">Snagajob</a><br/>
+                <a href="https://www.simplyhired.com" target="_blank">SimplyHired</a><br/>    
+
             </p>
         </div>
     </div>
-    <p class="w3-center"> Copyright - 2020 Codeck</p>
+    <p class="w3-center"> Copyright - 2020 InstaCode</p>
 </div>
     <!-- Optional JavaScript --> 
    <!-- <jQuery first, then Popper.js, then Bootstrap JS -->

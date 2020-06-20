@@ -9,16 +9,18 @@
     <link rel="stylesheet" href="{% static 'css/W3.css' %}">
     <!-- Bootstrap CSS --> 
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+   
     
    
 
     
-    <title>{% block title %}Developers forum{% endblock title %}</title> 
+    <title>{% block title %}InstaCode forum{% endblock title %}</title> 
 </head> 
 <body> 
         <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4"> 
-            <img src="{% static 'image/logo.png' %}" alt="logo" style="height:50px; float: left; margin-right: 7px;"> 
-            <a class="navbar-brand" href="{% url 'home' %}">Developers</a>
+            <a class="navbar-brand" href="{% url 'home' %}"> <img src="{% static 'image/instacode.png' %}" alt="logo" 
+            style="height:50px; float: left; margin-right: 7px;"></a>
+            <a class="navbar-brand" href="{% url 'home' %}">InstaCode</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" 
                 data-target="#navbarCollapse" aria-controls="navbarCollapse" 
                 aria-expanded="false" aria-label="Toggle navigation"> 
@@ -37,10 +39,7 @@
                     <li class="nav-item"><a href="{% url 'post_search' %}">Search for topics </a></li> 
                 </ul>
                 <ul class="navbar-nav mr-auto"> 
-                    <li class="nav-item"><a href="#">FAQs </a></li> 
-                </ul>
-                <ul class="navbar-nav mr-auto"> 
-                    <li class="nav-item"><a href="#">About Us </a></li> 
+                    <li class="nav-item"><a href="{% url 'about_us' %}">About Us </a></li> 
                 </ul>
                 <ul class="navbar-nav mr-auto"> 
                     <li class="nav-item"><a href="{% url 'contact' %}">Contact Us</a></li> 
@@ -64,7 +63,14 @@
                     
                    
                 {% else %}
+                <ul class="navbar-nav mr-auto"> 
+                    <li class="nav-item"><a href="{% url 'about_us' %}">About Us </a></li> 
+                </ul>
+                <ul class="navbar-nav mr-auto"> 
+                    <li class="nav-item"><a href="{% url 'contact' %}">Contact Us</a></li> 
+                </ul>
                     <form class="form-inline ml-auto"> 
+                        
                         <a href="{% url 'login' %}" class="btn btn-outline-secondary"> 
                         Log In</a> 
                         <a href="{% url 'signup' %}" class="btn btn-primary ml-4">
@@ -79,11 +85,84 @@
             {% block content %} 
             {% endblock content %}
             
-            <div class="w3-container w3-black w3-margin"><p> is a footer
-                this footer is to small ooo
-                <p>This will be anotehr content</p>
-                <p>This will be anotehr content</p>
-            </p></div>
+            <div class="w3-container w3-black w3-card-4 w3-border-top w3-border-blue">  
+                <div class="w3-row">
+                    <div class="w3-card w3-quarter w3-center">
+                        <h5>Other places to get programming help</h5>
+                        <p>
+                            <a href="https://www.stackoverflow.com" target="_blank">Stackoverflow</a><br/>
+                            <a href="https://www.quora.com" target="_blank">Quora</a><br/>
+                            <a href="https://www.reddit.com" target="_blank">Reddit</a><br/>
+                            <a href="https://www.stackexchange.com" target="_blank">StackExchange</a><br/>
+                            <a href="https://www.codeproject.com" target="_blank">CodeProject</a><br/>
+                            <a href="https://www.groups.google.com" target="_blank">Google Groups</a><br/>
+                            <a href="https://www.coderanch.com" target="_blank">CodeRanch</a><br/>
+                            <a href="https://www.programmersheaven.com" target="_blank">Programmers Heaven</a><br/>
+                            <a href="https://www.findnerd.com" target="_blank">FindNerd</a><br/>
+                            <a href="https://www.chegg.com" target="_blank">Chegg</a><br/>
+                        </p>
+                    </div>
+                    <div class="w3-card w3-quarter w3-center">
+                        <h5>Remote Work</h5>
+                        <p>
+                            <a href="https://www.angellist.com" target="_blank">AngelList</a><br/>
+                            <a href="https://www.remote.com" target="_blank">Remote</a><br/>
+                            <a href="https://www.weworkremotely.com" target="_blank">WeWorkRemotely</a><br/>
+                            <a href="https://www.remote.co" target="_blank">Remote.co</a><br/>
+                            <a href="https://www.jobpressco.co" target="_blank">JobPressco</a><br/>
+                            <a href="https://www.github.com" target="_blank">GitHub</a><br/>
+                            <a href="https://www.fiverr.com" target="_blank">Fiverr</a><br/>
+                            <a href="https://www.upwork.com" target="_blank">Upwork</a><br/>
+                            <a href="https://www.upwork.ng" target="_blank">UpworkNg</a><br/>
+                            <a href="https://www.guru.com" target="_blank">Guru</a><br/>
+                            <a href="https://www.eworker.co" target="_blank">Eworker</a><br/>
+                            
+                        </p>
+                    </div>
+                    <div class="w3-card w3-quarter w3-center">
+                        <h5>Programming Scholarships</h5>
+                        <p>
+                            <a href="https://www.microsoft.com/en-us/diversity/programs/blacks-scholarships.aspx" 
+                            target="_blank">Blacks at Microsoft Scholarships</a><br/>
+                            <a href="http://www.aises.org/scholarships" target="_blank">AISES Intel Scholarship Fund</a><br/>
+                            <a href="https://www.aim.applyISTS.net/esaf" target="_blank">ESA Foundation Scholarships</a><br/>
+                            <a href="http://www.course.com/webwarrior/rules.cfm" target="_blank">Web Warrior Scholarship</a><br/>
+                            <a href="http://www.ruraltechfund.org/rtf-scholarships/" target="_blank">Judy Shankle Scholarship</a><br/>
+                            <a href="http://www.newtarget.com/scholarship-fund-alexandria" 
+                            target="_blank">New Target Internet Scholarship</a><br/>
+                            <a href="https://www.community.hpe.com/t5/Grounded-in-the-Cloud/
+                            OpenStackscholarship-program-advancing-the-next-generation-of/ba-p/6780601#.WIO1Qzl9n0" 
+                            target="_blank">HP Helion OpenStack Scholarship</a><br/>
+                            <a href="https://www.code.google.com/codejam" target="_blank">Google Code Jam Competition</a><br/>
+                            <a href="https://www.nfb.org/scholarship-list" target="_blank">Oracle Scholarship</a><br/>
+                            <a href="https://www.webucator.com/scholarships/index.cfm" 
+                            target="_blank">Webucator Scholarship</a><br/>
+                            <a href="https://www.worldscholarshipforum.com/programming-scholarships" 
+                            target="_blank">More Scholarships</a><br/>
+            
+                        </p>
+                    </div>
+                    <div class="w3-card w3-quarter w3-center">
+                        <h5> Jobs sites</h5>
+            <p>
+                <a href="https://www.careerbuilder.com" target="_blank">CareerBuilder</a><br/> 
+                <a href="https://www.dice.com" target="_blank">Dice</a><br/>
+                <a href="https://www.grassdoor.com/index.htm" target="_blank">Grassdoor</a><br/> 
+                <a href="https://www.googleforjobs.com/about/" target="_blank">GoogleforJobs</a><br/>
+                <a href="https://www.idealist.org/en/" target="_blank">Idealist</a><br/>
+                <a href="https://www.indeed.com" target="_blank">Indeed</a><br/>
+                <a href="https://www.linkup.com" target="_blank">Linkup</a><br/>
+                <a href="https://www.about.linkedin.com" target="_blank">Linkedin</a><br/>
+                <a href="https://www.job.com" target="_blank">Job</a><br/>
+                <a href="https://www.theladders.com" target="_blank">Ladders</a><br/>
+                <a href="https://www.snagajob.com" target="_blank">Snagajob</a><br/>
+                <a href="https://www.simplyhired.com" target="_blank">SimplyHired</a><br/>    
+
+            </p>
+                    </div>
+                </div>
+                <p class="w3-center"> Copyright - 2020 Coderoom</p>
+            </div>
 
     <!-- Optional JavaScript --> 
    <!-- <jQuery first, then Popper.js, then Bootstrap JS -->

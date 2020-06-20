@@ -1,15 +1,14 @@
 {% extends 'base.html' %}
-{% block title %}Edit Post{% endblock title %}
+{% block title %}Edit {{post.title}}{% endblock title %}
 
 {% block content %}
-<div class="w3-container w3-card-4 w3-margin">
+<div class="w3-container">
     <h2>Edit this post</h2>
-        <note class="w3-text-blue"> Enclose your post in * * for bold, ** ** for italics, ``` ``` for code</note> 
+        <note class="w3-text-blue">*<b>bold</b>*  <i>**italics**</i> <code>```code ```</code></note> 
     <form action="" method="post">
         {% csrf_token %} 
         {% include 'bs4_form.html' with form=form %}
-        <button class="btn btn-info ml-2" type="submit">Save changes</button>
+        <p><button class="btn btn-info ml-2" type="submit">Save changes</button>
     </form> 
-
 </div> 
 {% endblock content %}

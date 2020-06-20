@@ -64,6 +64,6 @@ class Comment(models.Model):
         return f'Comment by {self.author} on {self.post}'
     
     def get_absolute_url(self):
-        return reverse('post_list')
+        return self.post.get_absolute_url() + f'#comment-{self.pk}'
 
  

@@ -139,7 +139,10 @@ class CommentUpdateView(UpdateView):
 class CommentDeleteView(DeleteView):
     model = Comment
     template_name = 'comment_delete.html'
-    success_url = reverse_lazy('post_list')
+
+    def get_success_url(self):
+        post = Post.objects.get(pk=self.object.post.pk)
+        return post.get_absolute_url()
 
 
 def post_search(request):

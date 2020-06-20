@@ -11,7 +11,7 @@
 
 <link rel="stylesheet" href="{% static 'css/blog.css' %}">
 
-<div class="w3-container w3-card-4 w3-margin">
+<div class="w3-container">
 <h1>{{ post.title }}</h1>  
 <p 
 class="date" style="color: blueviolet;">Published {{ post.publish | naturaltime }} by {{ post.author }}
@@ -27,17 +27,18 @@ class="date" style="color: blueviolet;">Published {{ post.publish | naturaltime 
         <h2>{{ total_comments }} comment{{ total_comments|pluralize }}</h2>
     {% endwith %}
 {% for comment in comments %}
-    <div class="comment">
-        <p class="info">
+    <div class="comment w3-leftbar w3-border-yellow">
+        <p class="info" style="color: blueviolet;"> 
             Comment {{ forloop.counter }} by {{ comment.author }} on
-            {{ comment.created }}
+            {{ comment.created | naturaltime }}
             <br/>
+            {{ comment.comment|linebreaks }}
             {% if request.user == comment.author %}
                 <a href="{% url 'comment_edit' comment.pk %}">Edit comment</a>|
                 <a href="{% url 'comment_delete' comment.pk %}">Delete comment</a>
             {% endif %}
         </p>
-        {{ comment.comment|linebreaks }}
+      
     </div>
 {% empty %}
     <p> There are no comments yet.</p>
@@ -47,29 +48,37 @@ class="date" style="color: blueviolet;">Published {{ post.publish | naturaltime 
     <h2>Your comment has been added</h2>
     
 {% else %}
+<div class="w3-container w3-card-4">
     <h2>Add a new comment</h2>
     <form method="post">
         {% csrf_token %}
         {{ comment_form.as_p }}
         <p><input type="submit" value="Add comment"></p>
     </form>
-   
+</div>  
 {% endif %}
 <div class="w3-container">
-<h2>Similar posts</h2>
+<h2 class="w3-text-blue">Similar posts</h2>
 {% for post in similar_posts %}
     <p><a href="{{ post.get_absolute_url }}"> {{ post.title }}</a></p>
 {% empty %}
     There are no similar posts yet.
 {% endfor %} <br/>
-Back to <a href="{% url 'post_list' %}">Forum</a>.
-</div>
 
 </div>
+<div class="w3-center">
+    <h4 class="w3-text-indigo w3-animate-fading">Share</h4>
         {% post_to_twitter post.title post %} 
         {% post_to_facebook post %}
-       
+        {% post_to_whatsapp post %}
+        {% post_to_telegram post %}
+        {% post_to_linkedin post.title post.title post %}
+        
+    </div>     
 
+<p><a href="{% url 'post_list' %}"> Back to Forum</a></p>
+</div>
+        
         
        
 
