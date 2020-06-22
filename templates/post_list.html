@@ -23,13 +23,13 @@
    
 
     
-    <title>InstaCode Forum</title> 
+    <title>Codes-Hub Forum</title> 
 </head> 
 <body> 
         <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4"> 
-            <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'image/instacode.png' %}" alt="logo" 
+            <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'image/Codes-Hub.png' %}" alt="logo" 
             style="height:50px; float: left; margin-right: 7px;"></a>
-            <a class="navbar-brand" href="{% url 'home' %}">InstaCode</a>
+            <a class="navbar-brand" href="{% url 'home' %}">Codes-Hub</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" 
                 data-target="#navbarCollapse" aria-controls="navbarCollapse" 
                 aria-expanded="false" aria-label="Toggle navigation"> 
@@ -93,7 +93,7 @@
     
     <div class="w3-row-padding w3-margin">
     <div class="w3-container w3-threequarter">
-    <h1 class="w3-button w3-blue">Recently Published</h1>
+    <h1 class="w3-button w3-blue w3-mobile">Recently Published</h1>
     {% if tag %}
         <h2>Posts tagged with "{{ tag.name }}" </h2>
     {%  endif %}  
@@ -112,14 +112,20 @@
         {% endfor %}
     </p>
    
-    <p class="date" style="color: blueviolet;"> Published {{ post.publish | naturaltime }} by {{ post.author }}</p>    
+    <p class="date" style="color: blueviolet;"> Published
+         {{ post.publish | naturaltime }} by {{ post.author }}</p> 
+         {% with post.comments.count as total_comments  %}
+        <h5>{{ total_comments }} comment{{ total_comments|pluralize }}</h2>
+    {% endwith %}   
             {{ post.body|markdown|truncatewords_html:30 }}
-            <a href="{% url 'post_detail' post.pk post.slug %}">Read more...</a> 
+            
+            <a href="{% url 'post_detail' post.pk post.slug %}">View All...</a> 
     {% endfor %}
+    <hr>
 </div>
 
 
-    <div class="w3-container w3-quarter w3-card w3-sand">    
+    <div class="w3-bar w3-quarter w3-card w3-sand">    
         <h1 class="w3-bar w3-blue">What's New</h1>   
             
 
@@ -231,7 +237,7 @@
             </p>
         </div>
     </div>
-    <p class="w3-center"> Copyright - 2020 InstaCode</p>
+    <p class="w3-center"> Copyright - 2020 Codes-Hub</p>
 </div>
 
 <!-- Optional JavaScript --> 

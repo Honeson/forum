@@ -19,7 +19,7 @@ from .forms import CommentForm, SearchForm
 # Create your views here.
 
 
-@login_required
+#@login_required
 def post_detail(request, post, pk):
     post = get_object_or_404(Post, id=pk, slug=post, status='published')
     comments = post.comments.filter(active=True)
