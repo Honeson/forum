@@ -27,19 +27,20 @@ class="date" style="color: blueviolet;">Published {{ post.publish | naturaltime 
         <h2>{{ total_comments }} comment{{ total_comments|pluralize }}</h2>
     {% endwith %}
 {% for comment in comments %}
-    <div class="comment w3-leftbar w3-border-yellow">
-        <p class="info" style="color: blueviolet;"> 
-            Comment {{ forloop.counter }} by {{ comment.author }} on
-            {{ comment.created | naturaltime }}
-            <br/>
+<p class="info" style="color: blueviolet;"> 
+    Comment {{ forloop.counter }} by {{ comment.author }};
+    {{ comment.created | naturaltime}}
+</p>
+    <div class="w3-bar w3-border w3-border-gray">
+       
             {{ comment.comment|linebreaks }}
-            {% if request.user == comment.author %}
-                <a href="{% url 'comment_edit' comment.pk %}">Edit comment</a>|
-                <a href="{% url 'comment_delete' comment.pk %}">Delete comment</a>
-            {% endif %}
-        </p>
       
     </div>
+    {% if request.user == comment.author %}
+                <a href="{% url 'comment_edit' comment.pk %}">Edit comment</a>|
+                <a href="{% url 'comment_delete' comment.pk %}">Delete comment</a>
+                <p></p>
+            {% endif %}
 {% empty %}
     <p> There are no comments yet.</p>
 {% endfor %}

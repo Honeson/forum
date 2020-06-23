@@ -4,7 +4,7 @@
 {% block content %}
 <div class="w3-container">
     <h2>Edit this post</h2>
-        <note class="w3-text-blue">*<b>bold</b>*  <i>**italics**</i> <code>```code ```</code></note> 
+        <note class="w3-text-blue">**<b>bold</b>**  <i>*italics*</i> <code>```code ```</code></note> 
     <form action="" method="post">
         {% csrf_token %} 
         {% include 'bs4_form.html' with form=form %}

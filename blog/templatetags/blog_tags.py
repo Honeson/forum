@@ -14,7 +14,7 @@ def total_posts():
 
 
 @register.inclusion_tag('latest_posts.html')
-def show_latest_posts(count=0):
+def show_latest_posts(count=5):
     latest_posts = Post.published.order_by('-publish')[:count]
     return {'latest_posts': latest_posts}
 
@@ -25,7 +25,7 @@ def total_comments():
 
 
 @register.inclusion_tag('latest_comments.html')
-def show_latest_comments(count=0):
+def show_latest_comments(count=5):
     latest_comments = Comment.objects.order_by('-created')[:count]
     return {'latest_comments': latest_comments}
 

@@ -93,7 +93,7 @@
     
     <div class="w3-row-padding w3-margin">
     <div class="w3-container w3-threequarter">
-    <h1 class="w3-button w3-blue w3-mobile">Recently Published</h1>
+    <h1 class="w3-button w3-blue">Recently Published</h1>
     {% if tag %}
         <h2>Posts tagged with "{{ tag.name }}" </h2>
     {%  endif %}  
@@ -136,7 +136,8 @@
 
         <h4>Total Comments: {% total_comments %}</h4>
         <h4 class="w3-text-indigo">Latest comments</h4>
-        {% show_latest_comments 10 %}
+        {% show_latest_comments %} 
+        
 
         <h4 class="w3-text-indigo">Most Commented Posts</h4>
         {% get_most_commented_posts as most_commented_posts %}

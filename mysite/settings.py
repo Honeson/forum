@@ -33,7 +33,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'vb#y^ws+4s_-^9n@^-jlz=1o8hali%
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 
-ALLOWED_HOSTS = ['instantcode.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 SITE_ID = 1
 INSTALLED_APPS = [
     # Local apps
