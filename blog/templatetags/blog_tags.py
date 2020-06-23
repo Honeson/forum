@@ -25,7 +25,7 @@ def total_comments():
 
 
 @register.inclusion_tag('latest_comments.html')
-def show_latest_comments(count=5):
+def show_latest_comments(count=2):
     latest_comments = Comment.objects.order_by('-created')[:count]
     return {'latest_comments': latest_comments}
 

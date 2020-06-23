@@ -70,10 +70,10 @@
      </nav>
         
             
-<div class="w3-display-container w3-sand">
-    <img src="{% static 'image/cover-1.png' %}" alt="Lights" 
+<div class="w3-display-container w3-black" style="height: 500px; width: 100%;">
+  <!--  <img src="{% static 'image/cover-1.png' %}" alt="Lights" 
         style="height: 500px; width: 100%;"
-        class="w3-grayscale">
+        class="w3-grayscale">     -->
         
     <div class="w3-display-topmiddle w3-wide" 
         style="margin-top: 70px;">
@@ -127,6 +127,42 @@
 
 </div>
 
+
+
+
+<div class="w3-display-container w3-black" style="height: 500px; width: 100%;">
+     <img src="{% static 'image/cover-1.png' %}" alt="Lights" 
+          style="height: 500px; width: 100%;"
+          class="w3-grayscale">
+          
+      <div class="w3-display-topmiddle w3-wide" 
+          style="margin-top: 70px;">
+          <div class="wordart welcome">
+              <span class="text">ALL</span>
+          </div>
+        
+                  
+      </div>
+  
+  
+  
+      <div class="w3-display-topmiddle w3-container" style="margin-top: 230px;">
+          <div class="wordart where">
+              <span class="text">ABOUT</span>
+          </div>
+      </div>
+  
+      <div class="w3-display-topmiddle w3-container" style="margin-top: 310px;">
+          <div class="wordart meet">
+              <span class="text">CODES</span>
+          </div>
+      </div>
+
+
+
+
+
+
 <div class="w3-container w3-pale-blue w3-leftbar w3-border-blue">
     <h2 class="w3-center w3-text-blue"> WHAT WE DO</h2>
     <h5  style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 
@@ -179,13 +215,14 @@
   
             
 
-<div class="w3-row w3-border">
+<div class="w3-row w3-border w3-margin-0">
     <div class="w3-half">
-        <a href="{% url 'signup' %}">
+        
             <img src="{% static 'image/head.jpg' %}" alt="head" 
             class="w3-image w3-hover-opacity w3-animate-right">
-        </a>
-        <p class="w3-large" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+        
+        <p class="w3-large w3-black" 
+        style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
         programming can be hectic when you don't have anyone to discuss your challanges with. 
         At Codes-Hub, we are out to stand for one another and make sure you don't suffer hard and long 
         before getting help. Bring your coding challanges and get help faster.</p>
@@ -196,7 +233,7 @@
         <img src="{% static 'image/children.jpg' %}" alt="children" 
         class="w3-image w3-hover-opacity w3-animate-left">
         </a>
-        <p class="w3-large" 
+        <p class="w3-large w3-black" 
         style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 
         Geneva, Verdana, sans-serif;">
         We don't only answer your questions but also rejoice with you when you avhieve something great
@@ -209,10 +246,7 @@
 
 
             
-        <div class="w3-panel">
-            {% block content %} 
-            {% endblock content %}
-        </div>
+        
 <div class="w3-container w3-black w3- card">  
     <div class="w3-row">
         <div class="w3-card w3-quarter w3-center">
