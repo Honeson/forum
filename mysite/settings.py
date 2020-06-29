@@ -48,7 +48,7 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 SUNNY_DB_PASS = True
 if ENV_ROLE == 'development':
-    DEBUG = True
+    DEBUG = False
     TEMPLATE_DEBUG = DEBUG
     SUNNY_DB_PASS = get_env_variable('SUNNY_DB_PASS')
 
