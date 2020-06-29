@@ -186,8 +186,11 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'default')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+#db_from_env = dj_database_url.config(conn_max_age=500)
+if ENV_ROLE == 'production':
+    DATABASES['default'] = dj_database_url.config()
+
+#DATABASES['default'].update(db_from_env)
 
 #STATICFILES_STORAGE = 'whitenoise.CompressedManifestStaticFilesStorage'
 
