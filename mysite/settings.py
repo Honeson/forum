@@ -10,14 +10,27 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-import os
+#import os
 
 from django.urls import reverse
 
 import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+import os
+from django.core.exceptions import ImproperlyConfigured
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
+def get_env_variable(var_name):
+    try:
+        return os.environ[var_name]
+    except KeyError:
+        error_msg = "Set the %s environment variable" % var_name
+        raise ImproperlyConfigured(error_msg)
+ENV_ROLE = get_env_variable('ENV_ROLE')
 
 
 # Quick-start development settings - unsuitable for production
@@ -30,7 +43,11 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'vb#y^ws+4s_-^9n@^-jlz=1o8hali%
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = False
-DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
+if ENV_ROLE == 'development':
+    DEBUG = True
+    TEMPLATE_DEBUG = DEBUG
 
 
 ALLOWED_HOSTS = ['*']
@@ -102,10 +119,12 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'NAME': 'postgres',
+        'NAME':'sunnyDB',
+        #'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'Honesty_20',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
