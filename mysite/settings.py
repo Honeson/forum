@@ -10,18 +10,19 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-#import os
+import os
 
 from django.urls import reverse
 
 import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-import os
+#import os
 from django.core.exceptions import ImproperlyConfigured
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+#BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 def get_env_variable(var_name):
@@ -39,15 +40,17 @@ ENV_ROLE = get_env_variable('ENV_ROLE')
 # SECURITY WARNING: keep the secret key used in production secret!
 
 
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'vb#y^ws+4s_-^9n@^-jlz=1o8hali%n=dxsfzph=rf39jxn^@8')
+SECRET_KEY = get_env_variable('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = False
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
+SUNNY_DB_PASS = False
 if ENV_ROLE == 'development':
     DEBUG = True
     TEMPLATE_DEBUG = DEBUG
+    SUNNY_DB_PASS = get_env_variable('SUNNY_DB_PASS')
 
 
 ALLOWED_HOSTS = ['*']
@@ -122,7 +125,7 @@ DATABASES = {
         'NAME':'sunnyDB',
         #'NAME': 'postgres',
         'USER': 'postgres',
-        'PASSWORD': 'Honesty_20',
+        'PASSWORD': SUNNY_DB_PASS,
         'HOST': 'localhost',
         'PORT': '5432',
     }
