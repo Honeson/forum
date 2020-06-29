@@ -2,3 +2,5 @@
 db.sqlite3
 ven
 __pycache__
+#EMAIL_HOST_PASSWORD = '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'
+#SECRET_KEY = 'vb#y^ws+4s_-^9n@^-jlz=1o8hali%n=dxsfzph=rf39jxn^@8'
