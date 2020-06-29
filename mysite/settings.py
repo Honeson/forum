@@ -46,9 +46,9 @@ SECRET_KEY = get_env_variable('SECRET_KEY')
 #DEBUG = False
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
-SUNNY_DB_PASS = False
+SUNNY_DB_PASS = True
 if ENV_ROLE == 'development':
-    DEBUG = False
+    DEBUG = True
     TEMPLATE_DEBUG = DEBUG
     SUNNY_DB_PASS = get_env_variable('SUNNY_DB_PASS')
 
