@@ -24,7 +24,6 @@ from blog.sitemaps import PostSiteMap
 sitemaps = {
     'posts': PostSiteMap,
 }
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),

@@ -22,7 +22,7 @@ def contactView(request):
             email = form.cleaned_data['email']
             message = form.cleaned_data['message']
             try:
-                send_mail(subject, message, email, ['admin@example.com'])
+                send_mail(subject, message, email, ['admin@codes-hub.com'])
             except BadHeaderError:
                 return HttpResponse('Invalid Header')
             return redirect('success')

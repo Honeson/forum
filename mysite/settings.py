@@ -13,16 +13,17 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 
 from django.urls import reverse
+from django.core.exceptions import ImproperlyConfigured
 
 import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-#import os
-from django.core.exceptions import ImproperlyConfigured
-#BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# import os
+
+# BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 def get_env_variable(var_name):
@@ -31,6 +32,8 @@ def get_env_variable(var_name):
     except KeyError:
         error_msg = "Set the %s environment variable" % var_name
         raise ImproperlyConfigured(error_msg)
+
+
 ENV_ROLE = get_env_variable('ENV_ROLE')
 
 
@@ -48,7 +51,7 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 SUNNY_DB_PASS = True
 if ENV_ROLE == 'development':
-    DEBUG = False
+    DEBUG = True
     TEMPLATE_DEBUG = DEBUG
     SUNNY_DB_PASS = get_env_variable('SUNNY_DB_PASS')
 
@@ -67,7 +70,7 @@ INSTALLED_APPS = [
     'taggit',
     'django.contrib.postgres',
     'widget_tweaks',
-    
+  
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -111,7 +114,7 @@ TEMPLATES = [
     },
 ]
 
-#FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
+# FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
@@ -122,10 +125,10 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME':'sunnyDB',
-        #'NAME': 'postgres',
+        #'NAME':'sunnyDB',
+        'NAME': 'postgres',
         'USER': 'postgres',
-        'PASSWORD': SUNNY_DB_PASS,
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -179,8 +182,8 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey' 
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_HOST_USER = 'postmaster@mg.codes-hub.com'
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'default')
 
 EMAIL_PORT = 587
@@ -193,5 +196,3 @@ if ENV_ROLE == 'production':
 #DATABASES['default'].update(db_from_env)
 
 #STATICFILES_STORAGE = 'whitenoise.CompressedManifestStaticFilesStorage'
-
-

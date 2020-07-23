@@ -1,6 +1,17 @@
 {
     "python.pythonPath": "ven\\Scripts\\python.exe",
     "python.linting.pylintEnabled": false,
-    "python.linting.pep8Enabled": true,
-    "python.linting.enabled": true
+    "python.linting.pycodestyleEnabled": true,
+    "python.linting.enabled": true,
+    "files.associations": {
+
+    
+    },
+    "python.terminal.launchArgs": [
+    
+    ],
+    "launch": {
+        "envFile": "${C:/Users/SUNNY/blog_folder}/ven"
+    
+    }
 }
